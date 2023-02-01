@@ -49,8 +49,4 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  encoding: utf8mb4_unicode_ci
-  username: bd8fd4e48a1490
-  password: f5067e31
   url: <%= ENV['DATABASE_URL'] %>
