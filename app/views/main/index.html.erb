@@ -1,0 +1,9 @@
+<h1>App</h1>
+<ul>
+  <% @items.each do |item| %>
+    <li>
+      <%= item.text %>: 
+      <%= item.number %>
+    </li>
+  <% end %>
+</ul>
