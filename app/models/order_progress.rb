@@ -1,0 +1,2 @@
+class OrderProgress < ApplicationRecord
+end

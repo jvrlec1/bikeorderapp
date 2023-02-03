@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  brand: one
+  name: MyString
+  last_supported_year: 1
+  service_1: 9.99
+  service_2: 9.99
+  service_3: 9.99
+  service_4: 9.99
+
+two:
+  brand: two
+  name: MyString
+  last_supported_year: 1
+  service_1: 9.99
+  service_2: 9.99
+  service_3: 9.99
+  service_4: 9.99

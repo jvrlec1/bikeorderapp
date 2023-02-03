@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  model: one
+  order_progress: one
+  service_date: 2023-02-03 13:09:38
+  model_year: 1
+  mileage: 1
+  service_1_flag: MyString
+  service_2_flag: MyString
+  service_3_flag: MyString
+  service_4_flag: MyString
+
+two:
+  user: two
+  model: two
+  order_progress: two
+  service_date: 2023-02-03 13:09:38
+  model_year: 1
+  mileage: 1
+  service_1_flag: MyString
+  service_2_flag: MyString
+  service_3_flag: MyString
+  service_4_flag: MyString
