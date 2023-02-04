@@ -1,9 +1,13 @@
-<h1>App</h1>
+<h1>alpha</h1>
 <ul>
-  <% @items.each do |item| %>
-    <li>
-      <%= item.text %>: 
-      <%= item.number %>
-    </li>
+  <%= form_with url: "/login", method: :post do |form| %>
+    <p>Email Adress</p>
+    <%= form.email_field :email, autofocus: true, :required => 'required' %>
+    <%= form.submit "Continue" %>
+  <% end %>
+  <% flash.each do |type, msg| %>
+    <div>
+      <%= msg %>
+    </div>
   <% end %>
 </ul>

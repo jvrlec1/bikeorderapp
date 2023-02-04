@@ -1,0 +1,12 @@
+<h1>My Orders</h1>
+
+ <%= form_with url: "/create_order", method: :post do |form| %>
+   <%= form.submit "Create New Order" %>
+ <% end %>
+
+<% unless @orders.blank? %>
+	<%= render "layouts/table" %>
+<% else %>
+	<%= render "layouts/no_orders" %>
+<% end %>
+
