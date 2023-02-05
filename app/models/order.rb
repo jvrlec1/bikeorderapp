@@ -10,7 +10,6 @@ class Order < ApplicationRecord
 private
 
   def validate_model_year
-    binding.pry
     if self.model_year < self.model.last_supported_year
       errors.add(:field, 'error message')
     end
