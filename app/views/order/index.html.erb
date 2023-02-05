@@ -43,6 +43,10 @@
 	<p>Price: <%= @price %></p>
 
 	<%= form.submit "Cancel" %>
-	<%= form.submit "Create New Order" %>
+	<% if @selected_model.nil? %>
+		<%= form.submit "Create New Order", disabled: true %>
+	<% else %>	
+		<%= form.submit "Create New Order" %>
+	<% end %>
 	<%= hidden_field_tag "id", @user_id %>
 <% end %>

@@ -16,24 +16,16 @@ class OrderController < ApplicationController
 			redirect_to controller: :homescreen, action: :index, id: params[:id]
 		else
 			selection
-			if valid_selection?
-				create_order
-				redirect_to controller: :homescreen, action: :index, id: params[:id]
-			else
-				selection
-			end
+			@order = create_order
+			@order.save
+			redirect_to controller: :homescreen, action: :index, id: params[:id] unless @order.errors.present?
 		end
 	end
 
-	def valid_selection?
-		true
-	end
-
 	def create_order
-		@order = Order.new(user_id: params[:id], model_id: @selected_model.id, order_progress_id: OrderProgress.find_by(name: "Active").id, 
+		Order.new(user_id: params[:id], model_id: @selected_model.id, order_progress_id: OrderProgress.find_by(name: "Active").id, 
 			service_date: @service_date, model_year: @model_year, mileage: @mileage, 
 			service_1_flag: @s1.state, service_2_flag: @s2.state, service_3_flag: @s3.state, service_4_flag: @s4.state)
-		@order.save
 	end
 
 	def selection
