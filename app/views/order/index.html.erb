@@ -1,0 +1,48 @@
+<h1>New Order</h1>
+<%= form_with url: "/update_order", method: :post do |form| %>
+	<p>Select Brand</p>
+	<%= form.collection_select :brand, @brands, :id, :name, { selected: @selected_brand&.id, prompt: "Select Brand" }, { prompt: true, onchange: 'this.form.submit()' }%>
+	<p>Model</p>
+	<%= form.collection_select :model, @models, :id, :name, { selected: @selected_model&.id, prompt: "Select Model" }, { prompt: true, onchange: 'this.form.submit()' }%>
+	<p>Model Year</p>
+	<%= form.text_field :model_year, value: @model_year %>
+	<p>Mileage</p>
+	<%= form.text_field :mileage, value: @mileage %>
+	<p>Choose Date</p>
+	<%= form.datetime_local_field :date, value: @service_date, onchange: 'this.form.submit()' %>
+	<p>Type of service</p>
+	<%= form.check_box :services, { multiple: true, checked: @s1.enabled?, onchange: 'this.form.submit()' }, "s1", nil %>
+	<%= form.label :chain_change, "Chain Change" %>
+	<%= form.label :chain_change_value, @s1.value.to_i.to_s + "$" %>
+	<%= form.check_box :services, { multiple: true, checked: @s2.enabled?, onchange: 'this.form.submit()' }, "s2", nil %>
+	<%= form.label :oil_change, "Oil and oil filter change" %>
+	<%= form.label :oil_change_value, @s2.value.to_i.to_s + "$" %>
+	<%= form.check_box :services, { multiple: true, checked: @s3.enabled?, onchange: 'this.form.submit()' }, "s3", nil %>
+	<%= form.label :air_filter_change, "Air filter change" %>
+	<%= form.label :air_filter_change_value, @s3.value.to_i.to_s + "$" %>
+	<%= form.check_box :services, { multiple: true, checked: @s4.enabled?, onchange: 'this.form.submit()' }, "s4", nil %>
+	<%= form.label :brake_fluid_change, "Brake fluid change" %>
+	<%= form.label :brake_fluid_change_value, @s4.value.to_i.to_s + "$" %>
+
+	<h3>Order Summary</h3>
+	<l><%= @service_date %></l>
+	<% if @s1.enabled? %>
+		<p>Chain Change <%= @s1.value.to_i.to_s + "$" %></p>
+	<% end %>
+	<% if @s2.enabled? %>
+		<p>Oil and oil filter change <%= @s2.value.to_i.to_s + "$" %></p>
+	<% end %>
+	<% if @s3.enabled? %>
+		<p>Air filter change <%= @s3.value.to_i.to_s + "$" %></p>
+	<% end %>
+	<% if @s4.enabled? %>
+		<p>Brake fluid change <%= @s4.value.to_i.to_s + "$" %></p>
+	<% end %>
+	<p>Full Price: <%= @full_price %></p>
+	<p>Discount: <%= @discount %></p>
+	<p>Price: <%= @price %></p>
+
+	<%= form.submit "Cancel" %>
+	<%= form.submit "Create New Order" %>
+	<%= hidden_field_tag "id", @user_id %>
+<% end %>

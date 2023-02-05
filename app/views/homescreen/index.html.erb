@@ -1,7 +1,8 @@
 <h1>My Orders</h1>
 
- <%= form_with url: "/create_order", method: :post do |form| %>
+ <%= form_with url: "/new_order", method: :post do |form| %>
    <%= form.submit "Create New Order" %>
+   <%= hidden_field_tag "id", @user_id %>
  <% end %>
 
 <% unless @orders.blank? %>
