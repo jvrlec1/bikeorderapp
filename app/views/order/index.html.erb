@@ -43,30 +43,38 @@
 
 	<l>Type of service</l>
 	<br>
-	<%= form.check_box :services, { multiple: true, checked: @s1.enabled?, onchange: 'this.form.submit()' }, "s1", nil %>
-	<%= form.label :chain_change, "Chain Change" %>
-	<%= form.label :chain_change_value, @s1.value_to_s + "€" %>
-	<br>
-	<%= form.check_box :services, { multiple: true, checked: @s2.enabled?, onchange: 'this.form.submit()' }, "s2", nil %>
-	<%= form.label :oil_change, "Oil and oil filter change" %>
-	<%= form.label :oil_change_value, @s2.value_to_s + "€" %>
-	<br>
-	<%= form.check_box :services, { multiple: true, checked: @s3.enabled?, onchange: 'this.form.submit()' }, "s3", nil %>
-	<%= form.label :air_filter_change, "Air filter change" %>
-	<%= form.label :air_filter_change_value, @s3.value_to_s + "€" %>
-	<br>
-	<%= form.check_box :services, { multiple: true, checked: @s4.enabled?, onchange: 'this.form.submit()' }, "s4", nil %>
-	<%= form.label :brake_fluid_change, "Brake fluid change" %>
-	<%= form.label :brake_fluid_change_value, @s4.value_to_s + "€" %>
-	<br>
+	<table>
+		<col width="300">
+		<col width="100" align="right">
+		<tr>
+			<td><%= form.check_box :services, { multiple: true, checked: @s1.enabled?, onchange: 'this.form.submit()' }, "s1", nil %>
+			<%= form.label :chain_change, "Chain Change" %></td>
+			<td><%= form.label :chain_change_value, @s1.value_to_s + "€" %></td>
+		</tr>
+		<tr>
+			<td><%= form.check_box :services, { multiple: true, checked: @s2.enabled?, onchange: 'this.form.submit()' }, "s2", nil %>
+			<%= form.label :oil_change, "Oil and oil filter change" %></td>
+			<td><%= form.label :oil_change_value, @s2.value_to_s + "€" %></td>
+		</tr>
+		<tr>
+			<td><%= form.check_box :services, { multiple: true, checked: @s3.enabled?, onchange: 'this.form.submit()' }, "s3", nil %>
+			<%= form.label :air_filter_change, "Air filter change" %></td>
+			<td><%= form.label :air_filter_change_value, @s3.value_to_s + "€" %></td>
+		</tr>
+		<tr>
+			<td><%= form.check_box :services, { multiple: true, checked: @s4.enabled?, onchange: 'this.form.submit()' }, "s4", nil %>
+			<%= form.label :brake_fluid_change, "Brake fluid change" %></td>
+			<td><%= form.label :brake_fluid_change_value, @s4.value_to_s + "€" %></td>
+		</tr>
+	</table>
 	<% @errors.select {|i| i.attribute == :services}.each do |attr| %>
 		<div style="color:red">
 	      <%= attr.type %>
 	    </div>
     <% end %>
-    <br><br>
+    <br>
 
-    <p><b>Note: Consider discount options</b></p>
+    <l><b>Note: Consider discount options</b></l><br>
     <div style="font-size:12px">
 	    <l><b>40 EUR OFF</b> for full service</l><br>
 	    <l><b>20% OFF</b> - Chain Change + Oil and oil filter change + Air filter change</l><br>
@@ -79,22 +87,51 @@
 	<% unless @service_date.nil? %>
 		<l><%= @service_date.to_datetime.strftime('%B %d, %Y at %H:%M') %></l><br><br>
 	<% end %>
-	<% if @s1.enabled? %>
-		<l>Chain Change <%= @s1.value_to_s + "€" %></l><br>
-	<% end %>
-	<% if @s2.enabled? %>
-		<l>Oil and oil filter change <%= @s2.value_to_s + "€" %></l><br>
-	<% end %>
-	<% if @s3.enabled? %>
-		<l>Air filter change <%= @s3.value_to_s + "€" %></l><br>
-	<% end %>
-	<% if @s4.enabled? %>
-		<l>Brake fluid change <%= @s4.value_to_s + "€" %></l><br>
-	<% end %>
+	<table>
+		<col width="300">
+		<col width="100" align="right">
+		<% if @s1.enabled? %>
+			<tr>
+				<td>Chain Change</td>
+				<td><%= @s1.value_to_s + "€" %></td>
+			</tr>
+		<% end %>
+		<% if @s2.enabled? %>
+			<tr>
+				<td>Oil and oil filter change</td>
+				<td><%= @s2.value_to_s + "€" %></td>
+			</tr>
+		<% end %>
+		<% if @s3.enabled? %>
+			<tr>
+				<td>Air filter change</td>
+				<td><%= @s3.value_to_s + "€" %></td>
+			</tr>
+		<% end %>
+		<% if @s4.enabled? %>
+			<tr>
+				<td>Brake fluid change</td>
+				<td><%= @s4.value_to_s + "€" %></td>
+			</tr>
+		<% end %>
+	</table>
 	<br>
-	<l>Full Price: <%= "%.2f" % @full_price.truncate(2) + "€" %></l><br>
-	<l>Discount: <%= @discount %></l><br>
-	<l><b>Price: </b><%= "%.2f" % @price.truncate(2) + "€" %></l><br><br>
+	<table>
+		<col width="300">
+		<col width="100" align="right">
+		<tr>
+			<td>Full Price:</td>
+			<td><%= "%.2f" % @full_price.truncate(2) + "€" %></td>
+		</tr>
+		<tr>
+			<td>Discount:</td>
+			<td><%= @discount %></td>
+		</tr>
+		<tr>
+			<td><b>Price: </b></td>
+			<td><%= "%.2f" % @price.truncate(2) + "€" %></td>
+		</tr>
+	</table>
 
 	<%= form.submit "Cancel Order" %>
 	<% if @selected_model.nil? %>
