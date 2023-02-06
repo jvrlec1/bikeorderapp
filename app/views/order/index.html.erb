@@ -33,16 +33,16 @@
 	<p>Type of service</p>
 	<%= form.check_box :services, { multiple: true, checked: @s1.enabled?, onchange: 'this.form.submit()' }, "s1", nil %>
 	<%= form.label :chain_change, "Chain Change" %>
-	<%= form.label :chain_change_value, @s1.value.to_i.to_s + "$" %>
+	<%= form.label :chain_change_value, @s1.value_to_s + "€" %>
 	<%= form.check_box :services, { multiple: true, checked: @s2.enabled?, onchange: 'this.form.submit()' }, "s2", nil %>
 	<%= form.label :oil_change, "Oil and oil filter change" %>
-	<%= form.label :oil_change_value, @s2.value.to_i.to_s + "$" %>
+	<%= form.label :oil_change_value, @s2.value_to_s + "€" %>
 	<%= form.check_box :services, { multiple: true, checked: @s3.enabled?, onchange: 'this.form.submit()' }, "s3", nil %>
 	<%= form.label :air_filter_change, "Air filter change" %>
-	<%= form.label :air_filter_change_value, @s3.value.to_i.to_s + "$" %>
+	<%= form.label :air_filter_change_value, @s3.value_to_s + "€" %>
 	<%= form.check_box :services, { multiple: true, checked: @s4.enabled?, onchange: 'this.form.submit()' }, "s4", nil %>
 	<%= form.label :brake_fluid_change, "Brake fluid change" %>
-	<%= form.label :brake_fluid_change_value, @s4.value.to_i.to_s + "$" %>
+	<%= form.label :brake_fluid_change_value, @s4.value_to_s + "€" %>
 	<% @errors.select {|i| i.attribute == :services}.each do |attr| %>
 		<div>
 	      <%= attr.type %>
@@ -56,22 +56,24 @@
     <p>15% OFF - Chain Change + Brake fluid change</p>
 
 	<h3>Order Summary</h3>
-	<l><%= @service_date.to_datetime.strftime('%B %d, %Y at %H:%M') %></l>
+	<% unless @service_date.nil? %>
+		<l><%= @service_date.to_datetime.strftime('%B %d, %Y at %H:%M') %></l>
+	<% end %>
 	<% if @s1.enabled? %>
-		<p>Chain Change <%= @s1.value.to_i.to_s + "$" %></p>
+		<p>Chain Change <%= @s1.value_to_s + "€" %></p>
 	<% end %>
 	<% if @s2.enabled? %>
-		<p>Oil and oil filter change <%= @s2.value.to_i.to_s + "$" %></p>
+		<p>Oil and oil filter change <%= @s2.value_to_s + "€" %></p>
 	<% end %>
 	<% if @s3.enabled? %>
-		<p>Air filter change <%= @s3.value.to_i.to_s + "$" %></p>
+		<p>Air filter change <%= @s3.value_to_s + "€" %></p>
 	<% end %>
 	<% if @s4.enabled? %>
-		<p>Brake fluid change <%= @s4.value.to_i.to_s + "$" %></p>
+		<p>Brake fluid change <%= @s4.value_to_s + "€" %></p>
 	<% end %>
-	<p>Full Price: <%= @full_price %></p>
+	<p>Full Price: <%= "%.2f" % @full_price.truncate(2) + "€" %></p>
 	<p>Discount: <%= @discount %></p>
-	<p>Price: <%= @price %></p>
+	<p>Price: <%= "%.2f" % @price.truncate(2) + "€" %></p>
 
 	<%= form.submit "Cancel" %>
 	<% if @selected_model.nil? %>

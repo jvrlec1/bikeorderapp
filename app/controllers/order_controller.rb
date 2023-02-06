@@ -53,7 +53,7 @@ class OrderController < ApplicationController
 			Discount.new(40.0, false)
 		elsif (services & ["s1", "s2", "s3"]).count == 3
 			Discount.new(20.0, true)
-		elsif (services & ["s1", "s3"]).count == 2
+		elsif (services & ["s2", "s3"]).count == 2
 			Discount.new(20.0, false)
 		elsif (services & ["s1", "s4"]).count == 2
 			Discount.new(15.0, true)

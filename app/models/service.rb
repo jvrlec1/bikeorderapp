@@ -19,6 +19,14 @@ class Service
   		end
   	end
 
+	def value_to_s
+		"%.2f" % @value.truncate(2)
+	end
+
+	def price_to_s
+		"%.2f" % price.truncate(2)
+	end
+
   	private
 
   	def service_value(model, id)

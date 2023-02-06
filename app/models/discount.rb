@@ -16,7 +16,7 @@ class Discount
   		if @percentage
   			@value.to_s + "%"
   		else
-  			@value.to_s + "$"
+			"%.2f" % @value.truncate(2) + "€"
   		end
   	end
 end
