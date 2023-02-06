@@ -5,7 +5,7 @@
   <%= hidden_field_tag "id", @user_id %>
 <% end %>
 
-<% if params[:order_created] %>
+<% if params[:order_created] == "true" %>
   <h3>Thank you for your order!</h3>
   <p>Order number: <%= @last_order %></p>
 <% end %>
