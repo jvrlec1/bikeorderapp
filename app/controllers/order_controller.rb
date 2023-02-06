@@ -20,7 +20,7 @@ class OrderController < ApplicationController
 			@order = create_order
 			@order.save
 			@errors = @order.errors
-			redirect_to controller: :homescreen, action: :index, id: params[:id] unless @errors.present?
+			redirect_to controller: :homescreen, action: :index, id: params[:id], order_created: true unless @errors.present?
 		end
 	end
 
