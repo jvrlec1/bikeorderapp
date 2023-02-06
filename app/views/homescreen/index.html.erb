@@ -1,18 +1,22 @@
 <h1>My Orders</h1>
+<br><br>
 
-<%= form_with url: "/new_order", method: :post do |form| %>
-  <%= form.submit "Create New Order" %>
-  <%= hidden_field_tag "id", @user_id %>
-<% end %>
+<ul>
+  <%= form_with url: "/new_order", method: :post do |form| %>
+    <%= form.submit "Create New Order" %>
+    <%= hidden_field_tag "id", @user_id %>
+  <% end %>
+  <br>
 
-<% if params[:order_created] == "true" %>
-  <h3>Thank you for your order!</h3>
-  <p>Order number: <%= @last_order %></p>
-<% end %>
+  <% if params[:order_created] == "true" %>
+    <h3>Thank you for your order!</h3>
+    <p>Order number: <%= @last_order %></p>
+  <% end %>
+  <br>
 
-<% unless @orders.blank? %>
-	<%= render "layouts/table" %>
-<% else %>
-	<%= render "layouts/no_orders" %>
-<% end %>
-
+  <% unless @orders.blank? %>
+    <%= render "layouts/table" %>
+  <% else %>
+    <%= render "layouts/no_orders" %>
+  <% end %>
+</ul>

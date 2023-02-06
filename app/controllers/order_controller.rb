@@ -13,7 +13,7 @@ class OrderController < ApplicationController
 		@errors = []
 		if params[:commit].nil?
 			selection
-		elsif params[:commit] == "Cancel"
+		elsif params[:commit] == "Cancel Order"
 			redirect_to controller: :homescreen, action: :index, id: params[:id]
 		else
 			selection
