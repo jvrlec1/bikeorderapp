@@ -1,22 +1,43 @@
-<h1>My Orders</h1>
-<br><br>
-
-<ul>
-  <%= form_with url: "/new_order", method: :post do |form| %>
-    <%= form.submit "Create New Order" %>
-    <%= hidden_field_tag "id", @user_id %>
-  <% end %>
-  <br>
-
-  <% if params[:order_created] == "true" %>
-    <h3>Thank you for your order!</h3>
-    <p>Order number: <%= @last_order %></p>
-  <% end %>
-  <br>
-
-  <% unless @orders.blank? %>
-    <%= render "layouts/table" %>
-  <% else %>
-    <%= render "layouts/no_orders" %>
-  <% end %>
-</ul>
+<table align="center">
+    <col width="800" >
+    <col width="400">
+    <tr valign="top">
+      <td>
+        <table align="left">
+          <col width="400" >
+          <col width="600">
+          <tr valign="top">
+            <td>
+              <br><br>
+              <h1><%= image_tag ("logo.jpg")%> alpha</h1><br>
+              <h2>My Orders</h2>
+            </td>
+            <td align="right">
+              <br><br>
+              <%= form_with url: "/new_order", method: :post do |form| %>
+                <%= form.submit "Create New Order" %>
+                <%= hidden_field_tag "id", @user_id %>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+        <% unless @orders.blank? %>
+          <%= render "layouts/table" %>
+        <% else %>
+          <%= render "layouts/no_orders" %>
+        <% end %>
+      </td>
+      <td>
+        <br><br>
+        <% if params[:order_created] == "true" %>
+          <br><br><br>
+          <h3>Thank you for your order!</h3>
+          <p>Order number: <%= @last_order %></p>
+          <br>
+          <%= image_tag ("thankyou.jpg")%>
+        <% else %>
+          <%= image_tag ("orders.jpg")%>
+        <% end %>
+      </td>
+    <tr>
+</table>

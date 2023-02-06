@@ -1,6 +1,12 @@
-<h1>New Order</h1>
-<ul>
-<%= form_with url: "/update_order", method: :get do |form| %>
+<h1><%= image_tag ("logo.jpg")%> alpha</h1><br>
+<table align="center">
+	<col width="300">
+	<col width="400">
+	<col width="400">
+	<tr valign="top">
+	<td>
+	<h3>New Order</h3>
+	<%= form_with url: "/update_order", method: :get do |form| %>
 	<l>Select Brand</l>
 	<br>
 	<%= form.collection_select :brand, @brands, :id, :name, { selected: @selected_brand&.id, prompt: "Select Brand" }, { prompt: true, onchange: 'this.form.submit()' }%>
@@ -30,7 +36,8 @@
 	    </div>
     <% end %>
     <br><br>
-
+</td>
+<td>
 	<l>Choose Date</l>
 	<br>
 	<%= form.datetime_local_field :date, value: @service_date %>
@@ -82,7 +89,8 @@
 	    <l><b>15% OFF</b> - Chain Change + Brake fluid change</l><br>
 	</div>
     <br><br>
-
+</td>
+<td>
 	<h3>Order Summary</h3>
 	<% unless @service_date.nil? %>
 		<l><%= @service_date.to_datetime.strftime('%B %d, %Y at %H:%M') %></l><br><br>
@@ -132,6 +140,7 @@
 			<td><%= "%.2f" % @price.truncate(2) + "€" %></td>
 		</tr>
 	</table>
+	<br><br>
 
 	<%= form.submit "Cancel Order" %>
 	<% if @selected_model.nil? %>
@@ -142,4 +151,6 @@
 
 	<%= hidden_field_tag "id", @user_id %>
 <% end %>
-</ul>
+</td>
+</tr>
+</table>
