@@ -1,15 +1,35 @@
 <h1>New Order</h1>
-<%= form_with url: "/update_order", method: :post do |form| %>
+<%= form_with url: "/update_order", method: :get do |form| %>
 	<p>Select Brand</p>
 	<%= form.collection_select :brand, @brands, :id, :name, { selected: @selected_brand&.id, prompt: "Select Brand" }, { prompt: true, onchange: 'this.form.submit()' }%>
+
 	<p>Model</p>
 	<%= form.collection_select :model, @models, :id, :name, { selected: @selected_model&.id, prompt: "Select Model" }, { prompt: true, onchange: 'this.form.submit()' }%>
+
 	<p>Model Year</p>
-	<%= form.text_field :model_year, value: @model_year %>
+	<%= form.number_field :model_year, value: @model_year %>
+	<% @errors.select {|i| i.attribute == :model_year}.each do |attr| %>
+		<div>
+	      <%= attr.type %>
+	    </div>
+    <% end %>
+
 	<p>Mileage</p>
-	<%= form.text_field :mileage, value: @mileage %>
+	<%= form.number_field :mileage, value: @mileage %>
+	<% @errors.select {|i| i.attribute == :mileage}.each do |attr| %>
+		<div>
+	      <%= attr.type %>
+	    </div>
+    <% end %>
+
 	<p>Choose Date</p>
-	<%= form.datetime_local_field :date, value: @service_date, onchange: 'this.form.submit()' %>
+	<%= form.datetime_local_field :date, value: @service_date %>
+	<% @errors.select {|i| i.attribute == :service_date}.each do |attr| %>
+		<div>
+	      <%= attr.type %>
+	    </div>
+    <% end %>
+
 	<p>Type of service</p>
 	<%= form.check_box :services, { multiple: true, checked: @s1.enabled?, onchange: 'this.form.submit()' }, "s1", nil %>
 	<%= form.label :chain_change, "Chain Change" %>
@@ -23,6 +43,11 @@
 	<%= form.check_box :services, { multiple: true, checked: @s4.enabled?, onchange: 'this.form.submit()' }, "s4", nil %>
 	<%= form.label :brake_fluid_change, "Brake fluid change" %>
 	<%= form.label :brake_fluid_change_value, @s4.value.to_i.to_s + "$" %>
+	<% @errors.select {|i| i.attribute == :services}.each do |attr| %>
+		<div>
+	      <%= attr.type %>
+	    </div>
+    <% end %>
 
 	<h3>Order Summary</h3>
 	<l><%= @service_date %></l>
@@ -46,7 +71,8 @@
 	<% if @selected_model.nil? %>
 		<%= form.submit "Create New Order", disabled: true %>
 	<% else %>	
-		<%= form.submit "Create New Order" %>
+		<%= form.submit "Create New Order"  %>
 	<% end %>
+
 	<%= hidden_field_tag "id", @user_id %>
 <% end %>

@@ -10,6 +10,7 @@ class OrderController < ApplicationController
 	private
 
 	def check_source
+		@errors = []
 		if params[:commit].nil?
 			selection
 		elsif params[:commit] == "Cancel"
@@ -18,7 +19,8 @@ class OrderController < ApplicationController
 			selection
 			@order = create_order
 			@order.save
-			redirect_to controller: :homescreen, action: :index, id: params[:id] unless @order.errors.present?
+			@errors = @order.errors
+			redirect_to controller: :homescreen, action: :index, id: params[:id] unless @errors.present?
 		end
 	end
 
