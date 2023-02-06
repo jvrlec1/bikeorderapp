@@ -50,7 +50,7 @@
     <% end %>
 
 	<h3>Order Summary</h3>
-	<l><%= @service_date %></l>
+	<l><%= @service_date.to_datetime.strftime('%B %d, %Y at %H:%M') %></l>
 	<% if @s1.enabled? %>
 		<p>Chain Change <%= @s1.value.to_i.to_s + "$" %></p>
 	<% end %>
