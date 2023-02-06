@@ -27,6 +27,8 @@ private
       return
     end
 
+    errors.add(:service_date, 'Working days are Mon-Fri.') if is_weekend?
+    errors.add(:service_date, 'Working hours are 08-16.') if outside_working_hours?
     errors.add(:service_date, 'Service date cannot be in the past.') if service_date < DateTime.now
   end
 
@@ -46,4 +48,11 @@ private
     errors.add(:services, 'At least one service needs to be selected.') unless services.include?("1")
   end
 
+  def is_weekend?
+    service_date.strftime('%A') == "Saturday" || service_date.strftime('%A') == "Sunday"
+  end
+
+  def outside_working_hours?
+    return true if service_date.hour >= 16 || service_date.hour < 8
+  end
 end
